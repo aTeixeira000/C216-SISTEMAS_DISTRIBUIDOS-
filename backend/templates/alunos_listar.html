@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Alunos cadastrados</h2>
+
+{% if not alunos %}
+    <p>Nenhum aluno cadastrado.</p>
+{% else %}
+    <table border="1" cellpadding="4">
+        <tr>
+            <th>ID</th>
+            <th>Matrícula</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Curso</th>
+            <th>Ações</th>
+        </tr>
+        {% for aluno in alunos %}
+        <tr>
+            <td>{{ aluno.id }}</td>
+            <td>{{ aluno.matricula }}</td>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.email }}</td>
+            <td>{{ aluno.curso }}</td>
+            <td>
+                <a href="{{ url_for('editar_aluno', aluno_id=aluno.id) }}">Editar</a>
+                |
+                <form action="{{ url_for('deletar_aluno', aluno_id=aluno.id) }}" method="post" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Tem certeza que deseja remover?');">
+                        Remover
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}

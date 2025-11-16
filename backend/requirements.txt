@@ -1,0 +1,9 @@
+Flask
+SQLAlchemy
+pymysql
+cryptography
+
+
+#docker-compose down
+
+#docker-compose up --build

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Bem-vindo ao sistema de cadastro de alunos.</p>
+<ul>
+    <li><a href="{{ url_for('listar_alunos') }}">Listar alunos</a></li>
+    <li><a href="{{ url_for('novo_aluno') }}">Cadastrar novo aluno</a></li>
+</ul>
+{% endblock %}

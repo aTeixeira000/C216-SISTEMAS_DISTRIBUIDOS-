@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{% if aluno %}Editar Aluno{% else %}Novo Aluno{% endif %}</h2>
+
+<form method="post">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" value="{{ aluno.nome if aluno else '' }}" required><br><br>
+
+    <label>E-mail:</label><br>
+    <input type="email" name="email" value="{{ aluno.email if aluno else '' }}" required><br><br>
+
+    <label>Curso (GEC, GEA, GES, GEB, GET):</label><br>
+    <input type="text" name="curso" value="{{ aluno.curso if aluno else '' }}" required><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<p><a href="{{ url_for('listar_alunos') }}">Voltar</a></p>
+{% endblock %}
