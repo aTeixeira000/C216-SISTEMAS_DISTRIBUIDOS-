@@ -1,0 +1,10 @@
+Flask
+SQLAlchemy
+pymysql
+cryptography
+flask-cors
+
+
+#docker-compose down -v
+
+#docker-compose up --build

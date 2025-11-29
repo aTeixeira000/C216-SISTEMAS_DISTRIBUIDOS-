@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Início</h2>
+<p>Bem-vindo à loja/locadora de games.</p>
+
+<ul>
+    <li><a href="{{ url_for('listar_jogos') }}">Gerenciar jogos</a></li>
+    <li><a href="{{ url_for('listar_clientes') }}">Gerenciar clientes</a></li>
+    <li><a href="{{ url_for('listar_locacoes') }}">Ver locações</a></li>
+    <li><a href="{{ url_for('loja') }}">Ir para a loja</a></li>
+    <li><a href="{{ url_for('ver_carrinho') }}">Ver carrinho</a></li>
+</ul>
+{% endblock %}

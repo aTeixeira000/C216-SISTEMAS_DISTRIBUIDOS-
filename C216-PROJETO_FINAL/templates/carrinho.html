@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Carrinho</h2>
+
+{% if not cart %}
+  <p>Seu carrinho está vazio.</p>
+{% else %}
+  <table border="1" cellpadding="4">
+    <tr>
+      <th>Jogo</th>
+      <th>Quantidade</th>
+      <th>Ações</th>
+    </tr>
+    {% for jogo_id, quantidade in cart.items() %}
+      {% set jogo = jogos[jogo_id] %}
+      <tr>
+        <td>{{ jogo.titulo }}</td>
+        <td>{{ quantidade }}</td>
+        <td>
+          <form action="{{ url_for('remover_do_carrinho', jogo_id=jogo_id) }}"
+                method="post" style="display:inline;"
+                onsubmit="return confirm('Remover este item do carrinho?');">
+            <button type="submit">Remover</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <p>
+    <a href="{{ url_for('loja') }}">Continuar comprando</a> |
+    <a href="{{ url_for('finalizar_compra') }}">Finalizar compra</a>
+  </p>
+{% endif %}
+{% endblock %}

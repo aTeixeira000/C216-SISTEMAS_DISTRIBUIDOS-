@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Locações</h2>
+
+<p>
+    <a href="{{ url_for('cadastrar_locacao') }}">Nova locação</a>
+</p>
+
+{% if not locacoes %}
+    <p>Nenhuma locação registrada.</p>
+{% else %}
+<table border="1" cellpadding="4">
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Jogo</th>
+        <th>Data retirada</th>
+        <th>Devolução real</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    {% for loc in locacoes %}
+    <tr>
+        <td>{{ loc.id }}</td>
+        <td>{{ loc.cliente.nome }}</td>
+        <td>{{ loc.jogo.titulo }}</td>
+        <td>{{ loc.data_retirada }}</td>
+        <td>{{ loc.data_devolucao_real or "-" }}</td>
+        <td>{{ loc.status }}</td>
+        <td>
+            <a href="{{ url_for('editar_locacao', locacao_id=loc.id) }}">Editar</a>
+
+            <form action="{{ url_for('deletar_locacao', locacao_id=loc.id) }}"
+                  method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+
+            {% if loc.status != 'DEVOLVIDO' %}
+            <form action="{{ url_for('devolver_locacao', locacao_id=loc.id) }}"
+                  method="post" style="display:inline;">
+                <button type="submit">Marcar devolvido</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

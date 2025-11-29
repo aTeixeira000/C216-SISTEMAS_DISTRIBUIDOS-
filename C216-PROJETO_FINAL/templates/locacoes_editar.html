@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar locação #{{ locacao.id }}</h2>
+
+<p><strong>Cliente:</strong> {{ locacao.cliente.nome }}</p>
+<p><strong>Jogo:</strong> {{ locacao.jogo.titulo }}</p>
+<p><strong>Data retirada:</strong> {{ locacao.data_retirada }}</p>
+<p><strong>Data devolução prevista:</strong> {{ locacao.data_devolucao_prevista or "-" }}</p>
+
+<form method="post">
+  <p>
+    <label>Status:</label>
+    <select name="status">
+      <option value="ALUGADO" {% if locacao.status == "ALUGADO" %}selected{% endif %}>Alugado</option>
+      <option value="DEVOLVIDO" {% if locacao.status == "DEVOLVIDO" %}selected{% endif %}>Devolvido</option>
+    </select>
+  </p>
+
+  <p>
+    <label>Data de devolução real (opcional):</label>
+    <input type="date" name="data_devolucao_real"
+           value="{{ locacao.data_devolucao_real if locacao.data_devolucao_real else '' }}">
+  </p>
+
+  <p>
+    <button type="submit">Salvar</button>
+    <a href="{{ url_for('listar_locacoes') }}">Voltar</a>
+  </p>
+</form>
+{% endblock %}

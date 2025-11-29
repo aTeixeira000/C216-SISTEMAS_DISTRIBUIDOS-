@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Loja / Locadora de Games</title>
+</head>
+<body>
+    <h1>Loja / Locadora de Games</h1>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Início</a> |
+        <a href="{{ url_for('listar_jogos') }}">Jogos</a> |
+        <a href="{{ url_for('listar_clientes') }}">Clientes</a> |
+        <a href="{{ url_for('listar_locacoes') }}">Locações</a> |
+        <a href="{{ url_for('loja') }}">Loja</a> |
+        <a href="{{ url_for('ver_carrinho') }}">Carrinho</a>
+    </nav>
+    <hr>
+
+    {# mensagens de feedback (flash) #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li><strong>[{{ category }}]</strong> {{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

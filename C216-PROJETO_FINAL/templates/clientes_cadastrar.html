@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Cadastrar Cliente</h2>
+
+<form method="post">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" required><br><br>
+
+    <label>Telefone:</label><br>
+    <input type="text" name="telefone" required><br><br>
+
+    <label>CPF:</label><br>
+    <input type="text" name="cpf" required><br><br>
+
+    <label>Endereço:</label><br>
+    <input type="text" name="endereco" required><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<p><a href="{{ url_for('listar_clientes') }}">Voltar</a></p>
+{% endblock %}

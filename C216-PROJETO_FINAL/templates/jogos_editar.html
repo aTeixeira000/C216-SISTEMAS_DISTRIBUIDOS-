@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar Jogo</h2>
+
+<form method="post">
+    <label>Título:</label><br>
+    <input type="text" name="titulo" value="{{ jogo.titulo }}" required><br><br>
+
+    <label>Gênero:</label><br>
+    <input type="text" name="genero" value="{{ jogo.genero }}" required><br><br>
+
+    <label>Ano de lançamento:</label><br>
+    <input type="number" name="ano_lancamento" value="{{ jogo.ano_lancamento }}" required><br><br>
+
+    <label>Plataformas:</label><br>
+    <input type="text" name="plataformas" value="{{ jogo.plataformas }}" required><br><br>
+
+    <label>Desenvolvedora:</label><br>
+    <input type="text" name="desenvolvedora" value="{{ jogo.desenvolvedora }}" required><br><br>
+
+    <label>Cópias totais:</label><br>
+    <input type="number" name="copias_total" value="{{ jogo.copias_total }}" min="1" required><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<p><a href="{{ url_for('listar_jogos') }}">Voltar</a></p>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Jogos</h2>
+
+<p>
+    <a href="{{ url_for('cadastrar_jogo') }}">Cadastrar novo jogo</a>
+</p>
+
+{% if not jogos %}
+    <p>Nenhum jogo cadastrado.</p>
+{% else %}
+<table border="1" cellpadding="4">
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Gênero</th>
+        <th>Ano</th>
+        <th>Plataformas</th>
+        <th>Desenvolvedora</th>
+        <th>Cópias (disp. / total)</th>
+        <th>Ações</th>
+    </tr>
+    {% for jogo in jogos %}
+    <tr>
+        <td>{{ jogo.id }}</td>
+        <td>{{ jogo.titulo }}</td>
+        <td>{{ jogo.genero }}</td>
+        <td>{{ jogo.ano_lancamento }}</td>
+        <td>{{ jogo.plataformas }}</td>
+        <td>{{ jogo.desenvolvedora }}</td>
+        <td>{{ jogo.copias_disponiveis }} / {{ jogo.copias_total }}</td>
+        <td>
+            <a href="{{ url_for('editar_jogo', jogo_id=jogo.id) }}">Editar</a>
+            <form action="{{ url_for('deletar_jogo', jogo_id=jogo.id) }}"
+                  method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

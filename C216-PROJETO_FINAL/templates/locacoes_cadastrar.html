@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nova locação</h2>
+
+<form method="post">
+
+    <p>
+        <label for="cliente_id">Cliente:</label>
+        <select name="cliente_id" id="cliente_id" required>
+            <option value="">Selecione...</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label for="jogo_id">Jogo:</label>
+        <select name="jogo_id" id="jogo_id" required>
+            <option value="">Selecione...</option>
+            {% for jogo in jogos %}
+            <option value="{{ jogo.id }}">
+                {{ jogo.titulo }} (disponíveis: {{ jogo.copias_disponiveis }})
+            </option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label for="data_retirada">Data de retirada:</label>
+        <input type="date" id="data_retirada" name="data_retirada" required>
+    </p>
+
+    {# Não tem data_devolucao_prevista nem campo de status aqui.
+       A locação sempre nasce como ALUGADO e sem devolução. #}
+
+    <p>
+        <button type="submit">Salvar</button>
+        <a href="{{ url_for('listar_locacoes') }}">Cancelar</a>
+    </p>
+</form>
+{% endblock %}

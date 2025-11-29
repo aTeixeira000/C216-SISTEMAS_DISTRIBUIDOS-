@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar Cliente</h2>
+
+<form method="post">
+    <label>Nome:</label><br>
+    <input type="text" name="nome" value="{{ cliente.nome }}" required><br><br>
+
+    <label>Telefone:</label><br>
+    <input type="text" name="telefone" value="{{ cliente.telefone }}" required><br><br>
+
+    <label>CPF:</label><br>
+    <input type="text" name="cpf" value="{{ cliente.cpf }}" required><br><br>
+
+    <label>Endereço:</label><br>
+    <input type="text" name="endereco" value="{{ cliente.endereco }}" required><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<p><a href="{{ url_for('listar_clientes') }}">Voltar</a></p>
+{% endblock %}

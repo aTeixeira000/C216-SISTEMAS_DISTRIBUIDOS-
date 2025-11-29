@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Loja de Jogos</h2>
+
+{% if not jogos %}
+  <p>Nenhum jogo disponível.</p>
+{% else %}
+  <table border="1" cellpadding="4">
+    <tr>
+      <th>Título</th>
+      <th>Gênero</th>
+      <th>Ano</th>
+      <th>Plataformas</th>
+      <th>Desenvolvedora</th>
+      <th>Cópias disponíveis</th>
+      <th>Ações</th>
+    </tr>
+    {% for jogo in jogos %}
+    <tr>
+      <td>{{ jogo.titulo }}</td>
+      <td>{{ jogo.genero }}</td>
+      <td>{{ jogo.ano_lancamento }}</td>
+      <td>{{ jogo.plataformas }}</td>
+      <td>{{ jogo.desenvolvedora }}</td>
+      <td>{{ jogo.copias_disponiveis }}</td>
+      <td>
+        {% if jogo.copias_disponiveis > 0 %}
+          <form action="{{ url_for('adicionar_ao_carrinho', jogo_id=jogo.id) }}" method="post" style="display:inline;">
+            <input type="number" name="quantidade"
+                   value="1" min="1" max="{{ jogo.copias_disponiveis }}" style="width:60px;">
+            <button type="submit">Adicionar ao carrinho</button>
+          </form>
+        {% else %}
+          Esgotado
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+
+<p><a href="{{ url_for('ver_carrinho') }}">Ver carrinho</a></p>
+{% endblock %}
